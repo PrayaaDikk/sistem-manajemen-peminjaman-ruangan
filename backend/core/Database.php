@@ -12,7 +12,7 @@ class Database {
             $pass = $config->database->password;
 
             $this->pdo = new PDO(
-                "mysqli:host=$host;dbname=$db;charset=utf8",$user,$pass
+                "mysql:host=$host;dbname=$db;charset=utf8",$user,$pass
             );
         }
         return $this->pdo;
