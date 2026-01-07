@@ -4,7 +4,7 @@ class Database {
 
     public function connect() {
         if ($this->pdo == null) {
-            $config = simplexml_load_file(__DIR__ . "/../backend/config/config.xml");
+            $config = simplexml_load_file(__DIR__ . "/../config/config.xml");
 
             $host = $config->database->host;
             $db = $config->database->name;
