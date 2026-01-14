@@ -3,8 +3,7 @@ import { myBookings } from "../../api/bookingApi";
 import type { Booking } from "../../types/booking";
 import { BookingItem } from "../../components/BookingItem";
 
-export default function Borrowing() {
-    const userId = 19;
+export default function Borrowing({ userId }: { userId: number }) {
     const [ongoing, setOngoing] = useState<Booking[]>([]);
     const [history, setHistory] = useState<Booking[]>([]);
     const [loading, setLoading] = useState(true);
