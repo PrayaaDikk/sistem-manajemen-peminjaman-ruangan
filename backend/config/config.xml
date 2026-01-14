@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config>
+  <database>
+    <host>localhost</host>
+    <name>room_booking</name>
+    <username>root</username>
+    <password>@PrayaaDikk17</password>
+  </database>
+
+  <rules>
+    <maxBookingPerDay>2</maxBookingPerDay>
+  </rules>
+</config>
