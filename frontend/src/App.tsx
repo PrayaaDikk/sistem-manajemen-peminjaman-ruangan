@@ -5,18 +5,24 @@ import Borrowing from "./pages/user/Borrowing";
 import BookingCreate from "./pages/user/BookingCreate";
 import BookingAdmin from "./pages/admin/BookingAdmin";
 import AdminLayout from "./layouts/AdminLayout";
+import { useState } from "react";
 
 export default function App() {
+    const [userId, setUserId] = useState(19);
+
     return (
         <BrowserRouter>
             <Routes>
-                <Route element={<MainLayout />}>
+                <Route element={<MainLayout userId={userId} />}>
                     <Route path="/" element={<RoomsPage />} />
                     <Route
-                        path="/booking/:roomId"
+                        path="/booking/:roomId/:userId"
                         element={<BookingCreate />}
                     />
-                    <Route path="/borrowing" element={<Borrowing />} />
+                    <Route
+                        path="/borrowing"
+                        element={<Borrowing userId={userId} />}
+                    />
                 </Route>
                 <Route element={<AdminLayout />}>
                     <Route path="/admin/booking" element={<BookingAdmin />} />

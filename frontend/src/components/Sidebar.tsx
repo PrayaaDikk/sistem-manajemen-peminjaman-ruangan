@@ -4,9 +4,7 @@ import profileImg from "../assets/img/profile-picture.png";
 import { getUserById } from "../api/userApi";
 import type { User } from "../api/userApi";
 
-export default function Sidebar() {
-    const userId = 19;
-
+export default function Sidebar({ userId }: { userId: number }) {
     const [user, setUser] = useState<User | null>(null);
 
     const loadUser = async () => {

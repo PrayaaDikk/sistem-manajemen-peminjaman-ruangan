@@ -4,6 +4,7 @@ import { createBooking } from "../../api/bookingApi";
 
 export default function BookingCreate() {
     const { roomId } = useParams();
+    const { userId } = useParams();
     const navigate = useNavigate();
 
     const [date, setDate] = useState("");
@@ -19,7 +20,7 @@ export default function BookingCreate() {
 
         try {
             await createBooking({
-                user_id: 19,
+                user_id: Number(userId),
                 room_id: Number(roomId),
                 booking_date: date,
                 start_time: start,
