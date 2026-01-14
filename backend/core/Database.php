@@ -1,20 +1,50 @@
 <?php
-class Database {
-    private $pdo;
 
-    public function connect() {
-        if ($this->pdo == null) {
-            $config = simplexml_load_file(__DIR__ . "/../config/config.xml");
+class Database
+{
+    private PDO $connection;
 
-            $host = $config->database->host;
-            $db = $config->database->name;
-            $user = $config->database->user;
-            $pass = $config->database->password;
+    public function __construct()
+    {
+        $configPath = __DIR__ . '/../config/config.xml';
 
-            $this->pdo = new PDO(
-                "mysql:host=$host;dbname=$db;charset=utf8",$user,$pass
-            );
+        if (!file_exists($configPath)) {
+            throw new Exception("File database.xml tidak ditemukan");
         }
-        return $this->pdo;
+
+        $xml = simplexml_load_file($configPath);
+
+        if ($xml === false) {
+            throw new Exception("Gagal membaca database.xml");
+        }
+
+        $dbConfig = $xml->database;
+
+        $host     = (string) $dbConfig->host;
+        $dbname   = (string) $dbConfig->name;
+        $username = (string) $dbConfig->username;
+        $password = (string) $dbConfig->password;
+
+        try {
+            $this->connection = new PDO(
+                "mysql:host=$host;dbname=$dbname;charset=utf8",
+                $username,
+                $password,
+                [
+                    PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION
+                ]
+            );
+        } catch (PDOException $e) {
+            die(json_encode([
+                'success' => false,
+                'message' => 'Koneksi database gagal',
+                'error' => $e->getMessage()
+            ]));
+        }
+    }
+
+    public function getConnection(): PDO
+    {
+        return $this->connection;
     }
 }

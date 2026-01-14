@@ -3,7 +3,7 @@
   <database>
     <host>localhost</host>
     <name>room_booking</name>
-    <user>root</user>
+    <username>root</username>
     <password>@PrayaaDikk17</password>
   </database>
 
